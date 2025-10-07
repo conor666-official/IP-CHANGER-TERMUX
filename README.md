@@ -141,25 +141,3 @@ For jq-based IP parsing (recommended):
 pkg install jq
 
 
-
----
-
-License
-
-MIT License — see LICENSE file.
-
----
-
-If you want, I can also **create a GitHub-ready release folder** including:
-
-- `ipc.sh`  
-- `README.md`  
-- `INSTALL.sh`  
-- `demo-screenshot.txt`  
-- `.gitignore`  
-- `LICENSE`  
-
-All ready to push to your repo with one commit.  
-
-Do you want me to do that?
-
