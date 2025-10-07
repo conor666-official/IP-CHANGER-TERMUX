@@ -1,73 +1,26 @@
-Got it! Here's a full, polished README.md for your IP-CHANGER (XTREME K1) project on GitHub. I’ve written it so you can directly place it in your repo, with sections for preview, installation, usage, troubleshooting, and features.
+Perfect! Here's a minimal, clean README.md suitable for GitHub with a copy-to-clipboard installation command, only the essential information:
 
 
 ---
 
 ⚡ IP-CHANGER (Termux) — XTREME K1 💀
 
-> Termux-friendly Tor + Privoxy IP rotation utility with a live terminal dashboard.
+> Termux-friendly IP rotation tool using Tor + Privoxy.
 
 
 
 
 ---
 
-Preview
+About
 
-⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣤⣶⣶⠖⠀⠀⠲⣶⣶⣤⡀
-⠀⠀⠀⠀⠀⠀⠀⢀⣴⣿⡿⠋⠀⠀⠀⠀⠀⠀⠙⢿⣿⣦⡀
-⠀⠀⠀⠀⠀⠀⠀⢀⣾⣿⡟⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢻⣿⣷⡀
-⠀⠀⠀⠀⠀⠀⠀⣾⣿⣿⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠘⣿⣿⣷
-⠀⠀⠀⠀⠀⠀⠀⣿⣿⣿⣇⣤⠶⠛⣛⣉⣙⡛⠛⢶⣄⣸⣿⣿⣿
-==============================================
-    ⚡ CATCH ME IF YOU CAN ⚡
-==============================================
-    IP-Changer by XTREME K1 💀
-----------------------------------------------
- Proxy Server : 127.0.0.1:8118
- Refresh Rate : 5s
- Network      : Tor (SOCKS5)
-----------------------------------------------
-[*] Renewing Tor circuits...
-NEW IP : 185.177.238.26 - London, England, UK
-MADE BY XTREME K1 💀
-----------------------------------------------
-🔄 Next refresh in 5s
+Rotates your public IP via Tor.
 
+Provides a local HTTP proxy at 127.0.0.1:8118.
 
----
-
-Features
-
-Starts multiple Tor instances + Privoxy.
-
-Rotates public IPs using Tor's SIGNAL NEWNYM.
-
-Local HTTP proxy available at 127.0.0.1:8118.
-
-Live terminal dashboard showing:
-
-Current IP
-
-Location (City, Region, Country)
-
-Network type (Wi-Fi / Mobile)
-
-Countdown to next IP rotation
-
-Recent IP history
-
+Shows new IP and location in terminal.
 
 Configurable refresh interval (-s option, min 5s, default 10s).
-
-Lightweight and Termux-friendly.
-
-Optional dependencies:
-
-jq for JSON parsing.
-
-termux-api for better network detection.
-
 
 
 
@@ -76,108 +29,32 @@ termux-api for better network detection.
 Requirements
 
 pkg update -y && pkg upgrade -y
-pkg install tor privoxy curl netcat-openbsd -y
-# Optional but recommended:
-pkg install jq termux-api -y
+pkg install tor privoxy curl netcat-openbsd jq -y
 
 
 ---
 
-Installation via Git Clone
+Installation (Copy & Run)
 
-# Clone repo
-git clone https://github.com/conor666-official/IP-CHANGER-TERMUX.git
-cd IP-CHANGER-TERMUX
+git clone https://github.com/conor666-official/IP-CHANGER-TERMUX.git ~/IP-CHANGER-TERMUX \
+&& mkdir -p ~/ipc \
+&& cp ~/IP-CHANGER-TERMUX/ipc.sh ~/ipc/ipc.sh \
+&& chmod +x ~/ipc/ipc.sh \
+&& echo -e '#!/data/data/com.termux/files/usr/bin/bash\nexec /data/data/com.termux/files/home/ipc/ipc.sh "$@"' > $PREFIX/bin/ipc \
+&& chmod +x $PREFIX/bin/ipc \
+&& echo "Installed! Run: ipc -s 5"
 
-# Copy script to runtime folder
-mkdir -p ~/ipc
-cp ipc.sh ~/ipc/ipc.sh
-chmod +x ~/ipc/ipc.sh
+> ✅ After this, simply run:
+ipc -s 5 to start rotating IPs.
 
-# Create global launcher
-cat > $PREFIX/bin/ipc <<'SH'
-#!/data/data/com.termux/files/usr/bin/bash
-exec /data/data/com.termux/files/home/ipc/ipc.sh "$@"
-SH
-chmod +x $PREFIX/bin/ipc
 
-# Run
-ipc -s 5
 
 
 ---
 
-Quick Install (One-liner)
+This README is short and clean, only with what’s necessary: script info, requirements, and an installation command with copy button on GitHub.
 
-pkg update -y && pkg upgrade -y && pkg install tor privoxy curl netcat-openbsd jq termux-api -y
-git clone https://github.com/conor666-official/IP-CHANGER-TERMUX.git ~/IP-CHANGER-TERMUX
-mkdir -p ~/ipc
-cp ~/IP-CHANGER-TERMUX/ipc.sh ~/ipc/ipc.sh
-chmod +x ~/ipc/ipc.sh
-cat > $PREFIX/bin/ipc <<'SH'
-#!/data/data/com.termux/files/usr/bin/bash
-exec /data/data/com.termux/files/home/ipc/ipc.sh "$@"
-SH
-chmod +x $PREFIX/bin/ipc
-echo "Installed. Run: ipc -s 5"
+If you want, I can also make it GitHub-ready with the actual “Copy” button snippet so users can literally click it to copy the install command.
 
-
----
-
-Usage
-
-ipc [-s SECONDS] [-h]
-
-Options:
-  -s SECONDS    Set rotation interval (minimum 5 sec, default 10)
-  -h            Show this help message
-
-
----
-
-Runtime Layout
-
-~/ipc/
-  ├─ .tor_multi/    # Tor instance data
-  ├─ .privoxy/      # Privoxy configs
-  └─ logs/          # Tor & Privoxy logs + IP history
-
-
----
-
-Troubleshooting
-
-Permission denied / Is a directory:
-
-
-rm -rf $PREFIX/bin/ipc
-# recreate launcher as shown in installation
-
-Could not fetch IP:
-
-Wait a few seconds for Tor to bootstrap.
-
-Check Tor logs:
-
-tail -n 200 ~/ipc/.tor_multi/tor0/notice.log
-
-
-Missing nc or netcat:
-
-
-pkg install netcat-openbsd
-
-
----
-
-License
-
-MIT License — see LICENSE file in repository.
-
-
----
-
-I can also make a GitHub-ready version with badges, syntax highlighting, and a “copy command” section so users can install with a single click, just like professional repos.
-
-Do you want me to do that next?
+Do you want me to do that?
 
