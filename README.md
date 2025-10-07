@@ -1,71 +1,100 @@
-Absolutely! Here's a full, ready-to-use README.md tailored for your Termux IP-Changer script. You can just copy this into README.md in your GitHub repo. I’ve formatted it with proper sections, previews, installation instructions, usage, and troubleshooting tips.
+Got it! Here's a full, polished README.md for your IP-CHANGER (XTREME K1) project on GitHub. I’ve written it so you can directly place it in your repo, with sections for preview, installation, usage, troubleshooting, and features.
 
 
 ---
 
-# ⚡ IP-CHANGER (Termux) — XTREME K1 💀
+⚡ IP-CHANGER (Termux) — XTREME K1 💀
 
 > Termux-friendly Tor + Privoxy IP rotation utility with a live terminal dashboard.
 
+
+
+
 ---
 
-## Preview
+Preview
 
-ASCII preview of the script in action:
-
-⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣤⣶⣶⠖⠀⠀⠲⣶⣶⣤⡀ ⠀⠀⠀⠀⠀⠀⠀⢀⣴⣿⡿⠋⠀⠀⠀⠀⠀⠀⠙⢿⣿⣦⡀ ⠀⠀⠀⠀⠀⠀⠀⢀⣾⣿⡟⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢻⣿⣷⡀ ⠀⠀⠀⠀⠀⠀⠀⣾⣿⣿⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠘⣿⣿⣷ ⠀⠀⠀⠀⠀⠀⠀⣿⣿⣿⣇⣤⠶⠛⣛⣉⣙⡛⠛⢶⣄⣸⣿⣿⣿
-
-⚡ CATCH ME IF YOU CAN ⚡
-
-============================================== IP-Changer by XTREME K1 💀
-
-Proxy Server : 127.0.0.1:8118 Refresh Rate : 5s Network      : Tor (SOCKS5)
-
-[*] Renewing Tor circuits... NEW IP : 185.177.238.26 - London, England, UK MADE BY XTREME K1 💀
-
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣤⣶⣶⠖⠀⠀⠲⣶⣶⣤⡀
+⠀⠀⠀⠀⠀⠀⠀⢀⣴⣿⡿⠋⠀⠀⠀⠀⠀⠀⠙⢿⣿⣦⡀
+⠀⠀⠀⠀⠀⠀⠀⢀⣾⣿⡟⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢻⣿⣷⡀
+⠀⠀⠀⠀⠀⠀⠀⣾⣿⣿⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠘⣿⣿⣷
+⠀⠀⠀⠀⠀⠀⠀⣿⣿⣿⣇⣤⠶⠛⣛⣉⣙⡛⠛⢶⣄⣸⣿⣿⣿
+==============================================
+    ⚡ CATCH ME IF YOU CAN ⚡
+==============================================
+    IP-Changer by XTREME K1 💀
+----------------------------------------------
+ Proxy Server : 127.0.0.1:8118
+ Refresh Rate : 5s
+ Network      : Tor (SOCKS5)
+----------------------------------------------
+[*] Renewing Tor circuits...
+NEW IP : 185.177.238.26 - London, England, UK
+MADE BY XTREME K1 💀
+----------------------------------------------
 🔄 Next refresh in 5s
 
----
-
-## Features
-
-- Starts multiple Tor instances + Privoxy.
-- Creates a local HTTP proxy at `127.0.0.1:8118`.
-- Rotates public IP using `SIGNAL NEWNYM`.
-- Live ASCII dashboard with:
-  - Current IP
-  - Location (city, region, country)
-  - Network interface
-  - Countdown timer
-  - Recent IP history
-- Configurable refresh interval (`-s`, default 10s, min 5s).
-- Fully optimized for Termux.
-- Optional support for `jq` and `termux-api` for better parsing & network info.
 
 ---
 
-## Requirements (Termux)
+Features
 
-```bash
+Starts multiple Tor instances + Privoxy.
+
+Rotates public IPs using Tor's SIGNAL NEWNYM.
+
+Local HTTP proxy available at 127.0.0.1:8118.
+
+Live terminal dashboard showing:
+
+Current IP
+
+Location (City, Region, Country)
+
+Network type (Wi-Fi / Mobile)
+
+Countdown to next IP rotation
+
+Recent IP history
+
+
+Configurable refresh interval (-s option, min 5s, default 10s).
+
+Lightweight and Termux-friendly.
+
+Optional dependencies:
+
+jq for JSON parsing.
+
+termux-api for better network detection.
+
+
+
+
+---
+
+Requirements
+
 pkg update -y && pkg upgrade -y
 pkg install tor privoxy curl netcat-openbsd -y
-# recommended for extra features:
+# Optional but recommended:
 pkg install jq termux-api -y
 
 
 ---
 
-Installation via git clone
+Installation via Git Clone
 
+# Clone repo
 git clone https://github.com/conor666-official/IP-CHANGER-TERMUX.git
 cd IP-CHANGER-TERMUX
 
-# Copy script into runtime folder
+# Copy script to runtime folder
 mkdir -p ~/ipc
 cp ipc.sh ~/ipc/ipc.sh
 chmod +x ~/ipc/ipc.sh
 
-# Create launcher so you can run 'ipc' from anywhere
+# Create global launcher
 cat > $PREFIX/bin/ipc <<'SH'
 #!/data/data/com.termux/files/usr/bin/bash
 exec /data/data/com.termux/files/home/ipc/ipc.sh "$@"
@@ -80,8 +109,7 @@ ipc -s 5
 
 Quick Install (One-liner)
 
-pkg update -y && pkg upgrade -y
-pkg install tor privoxy curl netcat-openbsd jq termux-api -y
+pkg update -y && pkg upgrade -y && pkg install tor privoxy curl netcat-openbsd jq termux-api -y
 git clone https://github.com/conor666-official/IP-CHANGER-TERMUX.git ~/IP-CHANGER-TERMUX
 mkdir -p ~/ipc
 cp ~/IP-CHANGER-TERMUX/ipc.sh ~/ipc/ipc.sh
@@ -99,13 +127,10 @@ echo "Installed. Run: ipc -s 5"
 Usage
 
 ipc [-s SECONDS] [-h]
-  -s SECONDS    Set rotation interval (minimum 5 sec)
-  -h            Show help
 
-Examples:
-
-ipc        # default 10s refresh
-ipc -s 5   # refresh every 5s
+Options:
+  -s SECONDS    Set rotation interval (minimum 5 sec, default 10)
+  -h            Show this help message
 
 
 ---
@@ -113,31 +138,46 @@ ipc -s 5   # refresh every 5s
 Runtime Layout
 
 ~/ipc/
-  ├─ .tor_multi/       # Tor instance directories
-  ├─ .privoxy/         # Privoxy config
-  └─ logs/             # IP and Tor logs
+  ├─ .tor_multi/    # Tor instance data
+  ├─ .privoxy/      # Privoxy configs
+  └─ logs/          # Tor & Privoxy logs + IP history
 
 
 ---
 
 Troubleshooting
 
-If you see Permission denied or Is a directory:
+Permission denied / Is a directory:
+
 
 rm -rf $PREFIX/bin/ipc
-# recreate launcher as above
+# recreate launcher as shown in installation
 
-If Could not fetch IP appears:
+Could not fetch IP:
 
-ls -1 ~/ipc/.tor_multi/*/notice.log
+Wait a few seconds for Tor to bootstrap.
+
+Check Tor logs:
+
 tail -n 200 ~/ipc/.tor_multi/tor0/notice.log
 
-Make sure nc is installed:
+
+Missing nc or netcat:
+
 
 pkg install netcat-openbsd
 
-For jq-based IP parsing (recommended):
 
-pkg install jq
+---
 
+License
+
+MIT License — see LICENSE file in repository.
+
+
+---
+
+I can also make a GitHub-ready version with badges, syntax highlighting, and a “copy command” section so users can install with a single click, just like professional repos.
+
+Do you want me to do that next?
 
