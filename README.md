@@ -1,5 +1,3 @@
-Perfect! Here's a minimal, clean README.md suitable for GitHub with a copy-to-clipboard installation command, only the essential information:
-
 
 ---
 
@@ -51,10 +49,4 @@ ipc -s 5 to start rotating IPs.
 
 
 ---
-
-This README is short and clean, only with what’s necessary: script info, requirements, and an installation command with copy button on GitHub.
-
-If you want, I can also make it GitHub-ready with the actual “Copy” button snippet so users can literally click it to copy the install command.
-
-Do you want me to do that?
 
